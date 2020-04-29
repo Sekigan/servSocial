@@ -39,6 +39,7 @@ class ControladorTPOprograma{
       header('Location: ./controlador.php?gui=TPOprograma');
     }
     else {
+      //Tengo un problema con el metodo de registrar 
       $this->modelo->Registrar($entidadTPOprog);
       
       if($_SESSION['errMsg']==0)
