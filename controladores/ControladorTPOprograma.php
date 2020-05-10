@@ -2,63 +2,61 @@
 
 require_once('./modelo/TPOprograma.php');
 
-class ControladorTPOprograma{
+class ControladorTPOprograma
+{
 
   private $modelo;
 
-  public function __CONSTRUCT(){
-      $this->modelo = new TPOprograma();
+  public function __CONSTRUCT()
+  {
+    $this->modelo = new TPOprograma();
   }
 
-  public function Index(){
-      require_once './vista/headerHTML.php';
-      require_once './vista/TPOprograma/shwTpoPrograma.php';
+  public function Index()
+  {
+    require_once './vista/headerHTML.php';
+    require_once './vista/TPOprograma/shwTpoPrograma.php';
   }
 
-  public function Crud(){
-      $entidadTPOprog = new TPOprograma();
-      if(isset($_REQUEST['id'])){
-        $entidadTPOprog = $this->modelo->Obtener($_REQUEST['id']);
-      }
+  public function Crud()
+  {
+    $entidadTPOprog = new TPOprograma();
+    if (isset($_REQUEST['id'])) {
+      $entidadTPOprog = $this->modelo->Obtener($_REQUEST['id']);
+    }
 
-      require_once './vista/headerHTML.php';
-      require_once './vista/TPOprograma/updTpoPrograma.php';
-
+    require_once './vista/headerHTML.php';
+    require_once './vista/TPOprograma/updTpoPrograma.php';
   }
 
-  public function Guardar(){
+  public function Guardar()
+  {
 
     $entidadTPOprog = new TPOprograma();
-    
-    $entidadTPOprog ->id            = $_REQUEST['txtId'];
-    $entidadTPOprog ->nombre         = $_REQUEST['txtNombre'];
-    $entidadTPOprog ->idDependencia   = $_REQUEST['txtDependencia'];
-    
-    if($entidadTPOprog->id >0){
+
+    $entidadTPOprog->id            = $_REQUEST['txtId'];
+    $entidadTPOprog->nombre         = $_REQUEST['txtNombre'];
+    $entidadTPOprog->idDependencia   = $_REQUEST['selDep'];
+    echo print_r($entidadTPOprog);
+    if ($entidadTPOprog->id > 0) {
       $this->modelo->Actualizar($entidadTPOprog);
       header('Location: ./controlador.php?gui=TPOprograma');
-    }
-    else {
-      //Tengo un problema con el metodo de registrar 
+    } else {
+
       $this->modelo->Registrar($entidadTPOprog);
-      
-      if($_SESSION['errMsg']==0)
-      {
+
+      if ($_SESSION['errMsg'] == 0) {
         $this->Crud();
-      }
-      else{
+      } else {
         require_once './vista/headerHTML.php';
         require_once './vista/TPOprograma/updTpoPrograma.php';
       }
     }
-
-
-}
-
-  public function Eliminar(){
-      $this->modelo->Eliminar($_REQUEST['id']);
-      header('Location: ./controlador.php?gui=TPOprograma');
   }
 
+  public function Eliminar()
+  {
+    $this->modelo->Eliminar($_REQUEST['id']);
+    header('Location: ./controlador.php?gui=TPOprograma');
+  }
 }
-?>

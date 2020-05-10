@@ -1,13 +1,13 @@
 <?php
 
-class TPOprograma
+class Estado
 {
+
     private $pdo;
 
     public $id;
-    public $idDependencia;
+    public $clave;
     public $nombre;
-
 
     public function __CONSTRUCT()
     {
@@ -18,24 +18,12 @@ class TPOprograma
         }
     }
 
-    public function Listar($entidad)
+    public function Listar()
     {
         try {
             $result = array();
-            switch ($entidad) {
-                case 'tipoprograma':
-                    $stm = $this->pdo->prepare("
-							SELECT t.id as id, t.nombre as nombre, d.nombre as Nombre_Dependencia
-							FROM dependencia d, tipoprograma t
-							WHERE
-							t.idDependencia=d.id;
-							");
-                    break;
-                case 'dependencias':
-                    $stm = $this->pdo->prepare("SELECT * FROM dependencia ;");
-                    break;
-            }
 
+            $stm = $this->pdo->prepare("SELECT * FROM estado");
             $stm->execute();
 
             return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -47,7 +35,7 @@ class TPOprograma
     public function Obtener($id)
     {
         try {
-            $stm = $this->pdo->prepare("SELECT * FROM tipoprograma WHERE id = ?");
+            $stm = $this->pdo->prepare("SELECT * FROM estado WHERE id = ?");
 
             $stm->execute(array($id));
             return $stm->fetch(PDO::FETCH_OBJ);
@@ -60,7 +48,7 @@ class TPOprograma
     {
         try {
             $stm = $this->pdo
-                ->prepare("DELETE FROM tipoprograma WHERE id = ?");
+                ->prepare("DELETE FROM estado WHERE id = ?");
 
             $stm->execute(array($id));
         } catch (Exception $e) {
@@ -71,15 +59,14 @@ class TPOprograma
     public function Actualizar($data)
     {
         try {
-            $sql = "UPDATE tipoprograma SET
-						tipoprograma.nombre = ?,
-						tipoprograma.idDependencia = ?
-					WHERE tipoprograma.id = ?";
-
+            $sql = "UPDATE estado SET
+						estado.clave = ?,
+						estado.nombre = ?
+				    WHERE estado.id = ?";
             $this->pdo->prepare($sql)->execute(
                 array(
+                    $data->clave,
                     $data->nombre,
-                    $data->idDependencia,
                     $data->id
                 )
             );
@@ -97,14 +84,13 @@ class TPOprograma
 
         try {
 
-            $sql = "INSERT INTO tipoprograma(nombre,idDependencia) 
+            $sql = "INSERT INTO estado (clave, nombre)
 		        VALUES (?, ?)";
-            
+
             $this->pdo->prepare($sql)->execute(
                 array(
-
-                    $data->nombre,
-                    $data->idDependencia
+                    $data->clave,
+                    $data->nombre
                 )
             );
         } catch (EXCEPTION $e) {

@@ -1,12 +1,20 @@
 <?php
 
-class TPOprograma
+class Dependencia
 {
+
     private $pdo;
 
     public $id;
-    public $idDependencia;
+    public $clave;
     public $nombre;
+    public $calle;
+    public $noExt;
+    public $colonia;
+    public $telefono;
+    public $contacto;
+    public $telContacto;
+    public $email;
 
 
     public function __CONSTRUCT()
@@ -18,24 +26,12 @@ class TPOprograma
         }
     }
 
-    public function Listar($entidad)
+    public function Listar()
     {
         try {
             $result = array();
-            switch ($entidad) {
-                case 'tipoprograma':
-                    $stm = $this->pdo->prepare("
-							SELECT t.id as id, t.nombre as nombre, d.nombre as Nombre_Dependencia
-							FROM dependencia d, tipoprograma t
-							WHERE
-							t.idDependencia=d.id;
-							");
-                    break;
-                case 'dependencias':
-                    $stm = $this->pdo->prepare("SELECT * FROM dependencia ;");
-                    break;
-            }
 
+            $stm = $this->pdo->prepare("SELECT * FROM dependencia");
             $stm->execute();
 
             return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -47,7 +43,7 @@ class TPOprograma
     public function Obtener($id)
     {
         try {
-            $stm = $this->pdo->prepare("SELECT * FROM tipoprograma WHERE id = ?");
+            $stm = $this->pdo->prepare("SELECT * FROM dependencia WHERE id = ?");
 
             $stm->execute(array($id));
             return $stm->fetch(PDO::FETCH_OBJ);
@@ -60,7 +56,7 @@ class TPOprograma
     {
         try {
             $stm = $this->pdo
-                ->prepare("DELETE FROM tipoprograma WHERE id = ?");
+                ->prepare("DELETE FROM dependencia WHERE id = ?");
 
             $stm->execute(array($id));
         } catch (Exception $e) {
@@ -71,15 +67,28 @@ class TPOprograma
     public function Actualizar($data)
     {
         try {
-            $sql = "UPDATE tipoprograma SET
-						tipoprograma.nombre = ?,
-						tipoprograma.idDependencia = ?
-					WHERE tipoprograma.id = ?";
-
+            $sql = "UPDATE dependencia SET
+						dependencia.clave = ?,
+						dependencia.nombre = ?,
+						dependencia.calle = ?,
+						dependencia.noExt = ?,
+						dependencia.colonia = ?,
+						dependencia.telefono = ?,
+						dependencia.contacto = ?,
+						dependencia.telContacto = ?,
+						dependencia.email = ?
+				    WHERE dependencia.id = ? ";
             $this->pdo->prepare($sql)->execute(
                 array(
+                    $data->clave,
                     $data->nombre,
-                    $data->idDependencia,
+                    $data->calle,
+                    $data->noExt,
+                    $data->colonia,
+                    $data->telefono,
+                    $data->contacto,
+                    $data->telContacto,
+                    $data->email,
                     $data->id
                 )
             );
@@ -97,14 +106,22 @@ class TPOprograma
 
         try {
 
-            $sql = "INSERT INTO tipoprograma(nombre,idDependencia) 
-		        VALUES (?, ?)";
-            
+            $sql = "INSERT INTO dependencia(clave, nombre, calle, noExt, colonia, telefono, contacto, telContacto, email)
+		VALUES (?,?,?,?,?,?,?,?,?)";
+
             $this->pdo->prepare($sql)->execute(
                 array(
 
+                    $data->clave,
                     $data->nombre,
-                    $data->idDependencia
+                    $data->calle,
+                    $data->noExt,
+                    $data->colonia,
+                    $data->telefono,
+                    $data->contacto,
+                    $data->telContacto,
+                    $data->email
+
                 )
             );
         } catch (EXCEPTION $e) {
