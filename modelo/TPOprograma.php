@@ -102,7 +102,6 @@ class TPOprograma
             
             $this->pdo->prepare($sql)->execute(
                 array(
-
                     $data->nombre,
                     $data->idDependencia
                 )

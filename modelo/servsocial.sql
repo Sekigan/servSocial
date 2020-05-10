@@ -56,14 +56,14 @@ CREATE TABLE `tipoprograma`(
   CONSTRAINT fk_idDep FOREIGN KEY(`idDependencia`) references `dependencia`(`id`))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
   
 CREATE TABLE `estado`(
-  `id` int,
+  `id` int AUTO_INCREMENT,
   `clave` varchar(5) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   CONSTRAINT pk_estado PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `municipio`(
-  `id` int,
+  `id` int AUTO_INCREMENT,
   `clave` varchar(5) NOT NULL,
   `nombre` varchar(30)NOT NULL,
   `cveEstado` int,
@@ -98,18 +98,18 @@ INSERT INTO `tipoprograma`(`id`,`nombre`,`idDependencia`) VALUES
 (11,'Curso Primeros Auxilios',02),
 (12,'Becario',03);
 
-INSERT INTO `estado` (`id`, `clave`, `nombre`) VALUES 
-('1', '01', 'Aguascalientes'),
-('2', '02', 'Guanajuato'),
-('3', '03', 'Coahuila'),
-('4', '04', 'Nuevo Leon');
+INSERT INTO `estado` (`clave`, `nombre`) VALUES 
+('01', 'Aguascalientes'),
+( '02', 'Guanajuato'),
+( '03', 'Coahuila'),
+( '04', 'Nuevo Leon');
 
 
-INSERT INTO `municipio` (`id`, `clave`, `nombre`, `cveEstado`) VALUES
-('1', '11', 'Aguascalientes', '1'), 
-('2', '21', 'Leon', '2'), 
-('3', '31', 'Saltillo', '3'), 
-('4', '41', 'Monterrey', '4');
+INSERT INTO `municipio` (`clave`, `nombre`, `cveEstado`) VALUES
+('11', 'Aguascalientes', '1'), 
+('21', 'Leon', '2'), 
+('31', 'Saltillo', '3'), 
+('41', 'Monterrey', '4');
 
 
 --

@@ -33,7 +33,7 @@
           <ul class="dropdown-menu">
             <li><a href="./controlador.php?gui=estatus">Estatus del proceso</a></li>
             <li class="divider"></li>
-            <li><a href="./controlador.php?gui=TPOprograma">Tipos de programas*</a></li>
+            <li><a href="./controlador.php?gui=TPOprograma">Tipos de programas</a></li>
             <li class="divider"></li>
             <li><a href="./controlador.php?gui=dependencia">Dependencias</a></li>
             <li class="divider"></li>

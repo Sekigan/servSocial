@@ -16,7 +16,7 @@
             <?php
             echo ($entidadTPOprog->id > 0
               ? "<input type='text' name='txtId' id='txtId' value='$entidadTPOprog->id' class='form-control' placeholder='Ingrese el ID' readonly>"
-              : "<input type='text' name='txtId' id='txtId' value='$entidadTPOprog->id' class='form-control' placeholder='Ingrese el ID' required autofocus>");
+              : "<input type='text' name='txtId' id='txtId' value='$entidadTPOprog->id' class='form-control' placeholder='AUTO_INCREMENT' readonly>");
             ?>
 
           </td>

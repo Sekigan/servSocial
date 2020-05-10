@@ -37,7 +37,7 @@ class ControladorTPOprograma
     $entidadTPOprog->id            = $_REQUEST['txtId'];
     $entidadTPOprog->nombre         = $_REQUEST['txtNombre'];
     $entidadTPOprog->idDependencia   = $_REQUEST['selDep'];
-    echo print_r($entidadTPOprog);
+    
     if ($entidadTPOprog->id > 0) {
       $this->modelo->Actualizar($entidadTPOprog);
       header('Location: ./controlador.php?gui=TPOprograma');
