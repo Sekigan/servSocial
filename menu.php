@@ -37,11 +37,21 @@
             <li class="divider"></li>
             <li><a href="./controlador.php?gui=dependencia">Dependencias</a></li>
             <li class="divider"></li>
-            <li><a href="./controlador.php?gui=estado">Estados*</a></li>
+            <li><a href="./controlador.php?gui=estado">Estados</a></li>
             <li class="divider"></li>
-            <li><a href="./controlador.php?gui=municipio">Municipios*</a></li>
+            <li><a href="./controlador.php?gui=municipio">Municipios</a></li>
             <li class="divider"></li>
             <li><a href="./controlador.php?gui=carrera">Carreras</a></li>
+            <li class="divider"></li>
+            <li><a href="./controlador.php?gui=programa">Programa</a></li>
+            <li class="divider"></li>
+            <li><a href="./controlador.php?gui=coordinador">Coordinador</a></li>
+            <li class="divider"></li>
+            <li><a href="./controlador.php?gui=Alumno">Alumno</a></li>
+            <li class="divider"></li>
+            <li><a href="./controlador.php?gui=servSocial">servSocial</a></li>
+            <li class="divider"></li>
+            <li><a href="./controlador.php?gui=Avance">Avance</a></li>
             <li class="divider"></li>
             <li><a href="#">Item</a></li>
           </ul>

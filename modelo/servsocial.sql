@@ -78,6 +78,84 @@ CREATE TABLE `carrera`(
  CONSTRAINT pk_carrera PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+create table `programa`(
+  `id` int AUTO_INCREMENT,
+  `nombre` varchar(155) NOT NULL,
+  `objetivo` varchar(255) NOT NULL,
+  `actividades` varchar(255) NOT NULL,
+  `dependenciaid` int NOT NULL,
+  `tpoprogramaid` int NOT NULL,
+  CONSTRAINT pk_programa PRIMARY KEY(`id`),
+  CONSTRAINT fk_dependenciaidp FOREIGN KEY (`dependenciaid`) REFERENCES `dependencia`(`id`) ,
+  CONSTRAINT fk_tpoprogramap FOREIGN KEY (`tpoprogramaid`) REFERENCES `tipoprograma`(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `coordinador` (
+  `id` int AUTO_INCREMENT,
+  `clave` varchar(5)NOT NULL,
+  `nombre` varchar(30)NOT NULL,
+  `apPaterno` varchar(20)NOT NULL,
+  `apMaterno` varchar(20)NOT NULL,
+  `email` varchar(80)NOT NULL,
+  `telefono` varchar(10) NOT NULL,
+  `dependenciaid` int NOT NULL,
+  CONSTRAINT pk_coordinador PRIMARY KEY(`id`),
+  CONSTRAINT fk_dependenciaidc FOREIGN KEY(`dependenciaid`) REFERENCES `dependencia`(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `alumno`(
+   `id` int AUTO_INCREMENT,
+  `clave` varchar(5)NOT NULL,
+  `nombre` varchar(30)NOT NULL,
+  `apPaterno` varchar(20)NOT NULL,
+  `apMaterno` varchar(20)NOT NULL,
+  `email` varchar(80)NOT NULL,
+  `telefono` varchar(10)NOT NULL,
+  `edad` smallint NOT NULL,
+  `sexo` varchar(1)NOT NULL,
+  `numCreditos` smallint NOT NULL,
+  `ptoCreditos` smallint NOT NULL,
+  `carreraid` int NOT NULL,
+  `semestre` smallint NOT NULL,
+  `domicilio` varchar(100) NOT NULL,
+  `municipioid` int NOT NULL,
+  `estadoid` int NOT NULL,
+  CONSTRAINT pk_alumno PRIMARY KEY (`id`),
+  CONSTRAINT fk_carreraida FOREIGN KEY  (`carreraid`) REFERENCES `carrera`(`id`),
+  CONSTRAINT fk_municipioida FOREIGN KEY  (`municipioid`) REFERENCES `municipio`(`id`),
+  CONSTRAINT fk_estadoida FOREIGN KEY  (`estadoid`) REFERENCES `estado`(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `servSocial`(
+ `id` int AUTO_INCREMENT ,
+  `alumnoid` int NOT NULL,
+  `dependenciaid` int NOT NULL,
+  `programaid` int NOT NULL,
+  `coordinadorid` int NOT NULL,
+  `finicio` date NOT NULL,
+  `fTermina` date NOT NULL,
+  `estatusid` int NOT NULL,
+  `fEstatus` date NOT NULL,
+  CONSTRAINT pk_servsocial PRIMARY KEY (`id`),
+  CONSTRAINT fk_dependenciaidss FOREIGN KEY(`dependenciaid`) REFERENCES `dependencia`(`id`),
+  CONSTRAINT fk_programaidss FOREIGN KEY (`programaid`) REFERENCES `programa`(`id`),
+  CONSTRAINT fk_coordinadorss FOREIGN KEY (`coordinadorid`) REFERENCES `coordinador`(`id`),
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `avance`(
+ `id` int AUTO_INCREMENT,
+  `alumnoid` int NOT NULL,
+  `fEntrega` date NOT NULL,
+  `descActividad` varchar(255) NOT NULL,
+  `totHrs` int(11) NOT NULL,
+  `noSemanas` smallint(6) NOT NULL,
+  `fInicioPeriodo` date NOT NULL,
+  `fTerminaPeriodo` date NOT NULL,
+  CONSTRAINT pk_avance PRIMARY KEY (`id`),
+  CONSTRAINT fk_alumnoida FOREIGN KEY (`alumnoid`) REFERENCES `alumno`(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Volcado de datos para la tabla `estatus`
 --

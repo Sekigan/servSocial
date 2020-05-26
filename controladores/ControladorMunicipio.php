@@ -37,7 +37,7 @@ class ControladorMunicipio
         $entidadmunicipio->id             = $_REQUEST['txtId'];
         $entidadmunicipio->clave          = $_REQUEST['txtClave'];
         $entidadmunicipio->nombre         = $_REQUEST['txtnombre'];
-        $entidadmunicipio->cveEstado      = $_REQUEST['selTipo'];
+        $entidadmunicipio->cveEstado      = $_REQUEST['selEST'];
 
         if ($entidadmunicipio->id > 0) {
             $this->modelo->Actualizar($entidadmunicipio);

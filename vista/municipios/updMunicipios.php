@@ -32,23 +32,19 @@
                     <td>
                         <?php
                         if ($entidadmunicipio->id > 0) {
-                            echo "<select id='selTipo' name='selTipo' class='form-control'>";
-                            foreach ($this->modelo->Listar('estado') as $nombreEstado) {
-                                echo "<option value='" . $entidadmunicipio->cveEstado . "'>" . $nombreEstado->nombre . "</option>";
-                                break;
-                            }
-                            foreach ($this->modelo->Listar('estado') as $nombreEstado) :
-                                if ($entidadmunicipio->cveEstado != $nombreEstado->clave) {
-                                    echo "<option value='" . $nombreEstado->clave . "'>" . $nombreEstado->nombre . "</option>";
+                            echo "<select id='selEST' name='selEST' class='form-control'>";
+                            foreach ($this->modelo->Listar('estado') as $estado) :
+                                if ($_REQUEST['id'] != $estado->id) {
+                                    echo "<option value='" . $estado->id . "'>" . $estado->clave  . " " . $estado->nombre . "</option>";
                                 }
                             endforeach;
                         } else {
                             echo "
-                <select required id='selTipo' name='selTipo' class='form-control'>
-                <option value='0'>Seleccione nombre del estado</option>
+                <select required id='selEST' name='selEST' class='form-control'>
+                <option value='0'>Seleccione Estado</option>
               ";
-                            foreach ($this->modelo->Listar('estado') as $nombreEstado) :
-                                echo "<option value='" . $nombreEstado->clave . "'>" . $nombreEstado->nombre . "</option>";
+                            foreach ($this->modelo->Listar('estado') as $estado) :
+                                echo "<option value='" . $estado->id .  "'>" . $estado->clave  . " " . $estado->nombre . "</option>";
                             endforeach;
                         }
                         ?>

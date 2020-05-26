@@ -33,7 +33,6 @@
             <?php
             if ($entidadTPOprog->id > 0) {
               echo "<select id='selDep' name='selDep' class='form-control'>";
-              echo "<option value='" . $_REQUEST['id'] . "'>" . $_REQUEST['nombre'] . "</option>";
               foreach ($this->modelo->Listar('dependencias') as $dependencia) :
                 if ($_REQUEST['id'] != $dependencia->id) {
                   echo "<option value='" . $dependencia->id . "'>" . $dependencia->nombre . "</option>";
