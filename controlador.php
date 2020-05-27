@@ -34,4 +34,3 @@ else
 }
 
 //adaptado de http://facturacionweb.site/blog/crud-usando-php-pdo-poo-mvc/
-?>

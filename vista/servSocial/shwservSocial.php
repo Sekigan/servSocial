@@ -30,7 +30,7 @@
             <td><?php echo $r->id; ?></td>
             <td><?php echo $r->alumno; ?></td>
             <td><?php echo $r->no; ?></td>
-            <td><?php echo $r->prono; ?></td>
+            <td><?php echo $r->prono; ?></td> 
             <td><?php echo $r->cornom; ?></td>
             <td><?php echo $r->fini; ?></td>
             <td><?php echo $r->fter; ?></td>

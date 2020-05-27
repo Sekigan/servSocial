@@ -3,7 +3,7 @@
 class Coordinador{
 
 	private $pdo;
-
+ 
   public $id;
   public $clave;
   public $nombre;
@@ -141,10 +141,8 @@ class Coordinador{
 		}
 		catch (EXCEPTION $e){
 			if($e){$_SESSION['errMsg'] = 1;}
-			alert(print_r($data));
+			
 		}
 	}
 
 }
-
-?>

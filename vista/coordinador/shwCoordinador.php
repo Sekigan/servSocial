@@ -6,7 +6,7 @@
       <li><a href="?c=coordinador&a=Crud&gui=coordinador">Agregar</a></li>
       <li><a href="./menu.php">Salir</a></li>
     </ol>
-  </div>
+  </div> 
   <table class="table  table-striped  table-hover" id="tabla" border="0">
       <thead>
           <tr>

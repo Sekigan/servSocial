@@ -1,3 +1,4 @@
+
 <div class="container-fluid box " margin: 500;>
   <div id='encabezado' style="padding:0px; " >
     <h3>Mostrando Registros de alumno</h3>
@@ -5,7 +6,7 @@
       <li>Sistema Informático - Servicio Social ITSaltillo</li>
       <li><a href="?c=alumno&a=Crud&gui=alumno">Agregar</a></li>
       <li><a href="./menu.php">Salir</a></li>
-    </ol>
+    </ol> 
   </div>
   <table class="table  table-striped  table-hover" id="tabla" border="0">
       <thead>

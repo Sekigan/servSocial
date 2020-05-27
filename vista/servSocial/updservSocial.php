@@ -13,7 +13,7 @@
     <tr>
       <td><label>Alumno</label></td>
       <td>
-        <?php
+        <?php 
           if($entidadservSocial->id > 0){
             echo "<select id='txtaluId' name='txtaluId' class='form-control'>";
             foreach($this->modelo->Listar('alumno') as $nombreAlumno){
