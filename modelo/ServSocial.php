@@ -36,7 +36,7 @@ class ServSocial
 												   servSocial.fInicio as fini,
 												   servSocial.fTermina as fter, 
 												   servSocial.fEstatus as fest, 
-												   alumno.nombre||' '||alumno.apPaterno||' '||alumno.apMaterno as alumno, 
+												   alumno.nombre as alumno, 
 												   dependencia.nombre as depno, 
 												   programa.nombre as prono, 
 												   coordinador.nombre as cornom, 

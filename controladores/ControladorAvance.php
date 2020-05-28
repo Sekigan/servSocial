@@ -2,64 +2,63 @@
 
 require_once('./modelo/Avance.php');
 
-class ControladorAvance{
+class ControladorAvance
+{
 
   private $modelo;
 
-  public function __CONSTRUCT(){
-      $this->modelo = new avance();
+  public function __CONSTRUCT()
+  {
+    $this->modelo = new Avance();
   }
 
-  public function Index(){
-      require_once './vista/headerHTML.php';
-      require_once './vista/avance/shwAvance.php';
+  public function Index()
+  {
+    require_once './vista/headerHTML.php';
+    require_once './vista/avance/shwAvance.php';
   }
 
-  public function Crud(){
-      $entidadavance = new Avance();
-      if(isset($_REQUEST['id'])){
-          $entidadavance = $this->modelo->Obtener($_REQUEST['id']);
-      }
+  public function Crud()
+  {
+    $entidadavance = new Avance();
+    if (isset($_REQUEST['id'])) {
+      $entidadavance = $this->modelo->Obtener($_REQUEST['id']);
+    }
 
-      require_once './vista/headerHTML.php';
-      require_once './vista/avance/updAvance.php';
-
+    require_once './vista/headerHTML.php';
+    require_once './vista/avance/updAvance.php';
   }
 
-  public function Guardar(){
+  public function Guardar()
+  {
 
     $entidadavance = new Avance();
-    $entidadavance->id                  = $_REQUEST['txtId'];
-    $entidadavance->alumnoId             = $_REQUEST['txtnombre'];
-    $entidadavance->fEntrega            = $_REQUEST['txtObjetivo'];
+    $entidadavance->id                  = $_REQUEST['txtid'];
+    $entidadavance->alumnoid             = $_REQUEST['selAL'];
+    $entidadavance->fEntrega            = $_REQUEST['fEntrega'];
     $entidadavance->descActividad       = $_REQUEST['txtActividad'];
-    $entidadavance->totHrs            = $_REQUEST['selDep'];
-    $entidadavance->noSemanas         = $_REQUEST['selTipo'];
-    $entidadavance->fInicioPeriodo    = $_REQUEST['selTipo'];
-    $entidadavance->fTerminaPeriodo    = $_REQUEST['selTipo'];
+    $entidadavance->totHrs            = $_REQUEST['totHrs'];
+    $entidadavance->noSemanas         = $_REQUEST['noSemanas'];
+    $entidadavance->fInicioPeriodo    = $_REQUEST['fInicioPeriodo'];
+    $entidadavance->fTerminaPeriodo    = $_REQUEST['fTerminaPeriodo'];
 
-    if($entidadavance->id >0){
+    if ($entidadavance->id > 0) {
       $this->modelo->Actualizar($entidadavance);
       header('Location: ./controlador.php?gui=avance');
-    }
-    else {
+    } else {
       $this->modelo->Registrar($entidadavance);
-      if($_SESSION['errMsg']==0)
-      {
+      if ($_SESSION['errMsg'] == 0) {
         $this->Crud();
-      }
-      else{
+      } else {
         require_once './vista/headerHTML.php';
         require_once './vista/avance/updAvance.php';
       }
     }
-
-
-}
-
-  public function Eliminar(){
-      $this->modelo->Eliminar($_REQUEST['id']);
-      header('Location: ./controlador.php?gui=avance');
   }
 
+  public function Eliminar()
+  {
+    $this->modelo->Eliminar($_REQUEST['id']);
+    header('Location: ./controlador.php?gui=avance');
+  }
 }

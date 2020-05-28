@@ -49,7 +49,7 @@ class ControladorAlumno
     $entidadalumno->domicilio             = $_REQUEST['txtdomicilio'];
     $entidadalumno->municipioid           = $_REQUEST['selMUN'];
     $entidadalumno->estadoid              = $_REQUEST['selEST'];
-    echo var_dump($entidadalumno);
+
     if ($entidadalumno->id > 0) {
       $this->modelo->Actualizar($entidadalumno);
       header('Location: ./controlador.php?gui=alumno');

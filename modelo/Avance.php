@@ -1,12 +1,13 @@
 <?php
 
-class Avance{
+class Avance
+{
 
 	private $pdo;
 
-  public $id;
-  public $alumnoId;
-  public $fEntrega;
+	public $id;
+	public $alumnoid;
+	public $fEntrega;
 	public $descActividad;
 	public $totHrs;
 	public $noSemanas;
@@ -15,138 +16,125 @@ class Avance{
 
 	public function __CONSTRUCT()
 	{
-		try
-		{
+		try {
 			$this->pdo = Database::StartUp();
-		}
-		catch(Exception $e)
-		{
+		} catch (Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
 	public function Listar($entidad)
 	{
-		try
-		{
+		try {
 			$result = array();
 			switch ($entidad) {
 				case 'avance':
-				$stm = $this->pdo->prepare("
-				SELECT avance.id as id, avance.alumnoId as alumnoid, avance.fEntrega
-				FROM avance, dependencia, tpoavances
-				WHERE avance.dependenciaId = dependencia.id && avance.tpoavanceId = tpoavances.clave;
+					$stm = $this->pdo->prepare("SELECT avance.id as id, 
+				avance.alumnoid as alumnoid,
+				alumno.nombre as alumno,
+				avance.descActividad as actividades,
+				avance.fEntrega
+				FROM avance, alumno
+				WHERE avance.alumnoid = alumno.id ;
 				");
-				break;
-
-
-				case 'dependencia':
-					$stm = $this->pdo->prepare("SELECT * FROM dependencia;");
 					break;
 
-			case 'tipo':
-				$stm = $this->pdo->prepare("SELECT * FROM tpoavances;");
-				break;
+
+				case 'alumno':
+					$stm = $this->pdo->prepare("SELECT * FROM alumno;");
+					break;
 			}
 
 			$stm->execute();
 			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
+		} catch (Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
 	public function Obtener($id)
 	{
-		try
-		{
+		try {
 			$stm = $this->pdo->prepare("SELECT * FROM avance WHERE id = ?");
 
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
-		} catch (Exception $e)
-		{
+		} catch (Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
 	public function Eliminar($id)
 	{
-		try
-		{
+		try {
 			$stm = $this->pdo
-			            ->prepare("DELETE FROM avance WHERE id = ?");
+				->prepare("DELETE FROM avance WHERE id = ?");
 
 			$stm->execute(array($id));
-		} catch (Exception $e)
-		{
+		} catch (Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
 	public function Actualizar($data)
 	{
-		try
-		{
+		try {
 			$sql = "UPDATE avance SET
-						avance.id = ?,
-						avance.nombre = ?,
-						avance.objetivo = ?
-						avance.actividades = ?
-						avance.dependenciaId = ?
-						avance.tpoavanceId = ?
-				    WHERE avance.id = ?";
+						avance.alumnoid=?,
+						avance.fEntrega= ?,
+						avance.descActividad = ?,
+						avance.totHrs = ?,
+						avance.noSemanas=?,
+						avance.fInicioPeriodo=?,
+						avance.fTerminaPeriodo=?						
+				    	WHERE avance.id = ?";
 			$this->pdo->prepare($sql)->execute(
-				    array(
-							$data->nombre,
-              $data->objetivo,
-							$data->actividades,
-							$data->dependenciaId,
-							$data->tpoavanceId,
-							$data->id
+				array(
+					$data->alumnoid,
+					$data->fEntrega,
+					$data->descActividad,
+					$data->totHrs,
+					$data->noSemanas,
+					$data->fInicioPeriodo,
+					$data->fTerminaPeriodo,
+					$data->id
 
-					)
-				);
-
-		} catch (EXCEPTION $e)
-		{
+				)
+			);
+		} catch (EXCEPTION $e) {
 			$error = $e->getMessage();
-		  echo "<h2>".$error."</h2>";
+			echo "<h2>" . $error . "</h2>";
 			die($e->getMessage());
 		}
-
 	}
 
-	public function Registrar($data){
+	public function Registrar($data)
+	{
 
 		$_SESSION['errMsg'] = 0;
 
 		try {
 
-		$sql = "INSERT INTO avance( nombre, objetivo, actividades, dependenciaId, tpoavanceId)
-						VALUES (?, ?, ?, ?, ?)";
+			$sql = "INSERT INTO avance( alumnoid, fEntrega, descActividad, totHrs, noSemanas,fInicioPeriodo,fTerminaPeriodo)
+						VALUES (?, ?, ?, ?, ?, ?,?)";
 
 
 
-		$this->pdo->prepare($sql)->execute(
+			$this->pdo->prepare($sql)->execute(
 				array(
-					$data->nombre,
-					$data->objetivo,
-					$data->actividades,
-					$data->dependenciaId,
-					$data->tpoavanceId
-
+					$data->alumnoid,
+					$data->fEntrega,
+					$data->descActividad,
+					$data->totHrs,
+					$data->noSemanas,
+					$data->fInicioPeriodo,
+					$data->fTerminaPeriodo
 				)
 			);
-		}
-		catch (EXCEPTION $e){
-			if($e){$_SESSION['errMsg'] = 1;}
-			alert(print_r($data));
+		} catch (EXCEPTION $e) {
+			if ($e) {
+				$_SESSION['errMsg'] = 1;
+			}
 		}
 	}
-
 }
-
-?>

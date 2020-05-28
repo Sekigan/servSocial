@@ -109,7 +109,7 @@
         <tr>
           <td><label>Fecha inicio</label></td>
 
-          <td><input type="date" id='"txtfIni"' name="txtfIni" value="<?php echo $aiuda->anio / $aiuda->mes / $aiuda->dia; ?>" class="from-control" required></td>
+          <td><input type="date" id='"txtfIni"' name="txtfIni"  class="from-control" required></td>
         </tr>
 
         <tr>
