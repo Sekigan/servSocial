@@ -18,7 +18,7 @@ if(!isset($_REQUEST['c']))
 }
 
 else
-{
+{ 
     // Obtenemos el controlador que queremos cargar
     $controlador  = $_REQUEST['c'];
     $accion       = isset($_REQUEST['a']) ? $_REQUEST['a'] : 'Index';

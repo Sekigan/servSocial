@@ -1,6 +1,6 @@
 <?php
 
-require_once('./modelo/servSocial.php');
+require_once('./modelo/ServSocial.php');
 
 class ControladorservSocial
 {
@@ -9,7 +9,7 @@ class ControladorservSocial
 
   public function __CONSTRUCT()
   {
-    $this->modelo = new servSocial();
+    $this->modelo = new ServSocial();
   }
 
   public function Index()
@@ -20,7 +20,7 @@ class ControladorservSocial
 
   public function Crud()
   {
-    $entidadservSocial = new servSocial();
+    $entidadservSocial = new ServSocial();
     if (isset($_REQUEST['id'])) {
       $entidadservSocial = $this->modelo->Obtener($_REQUEST['id']);
     }
@@ -32,18 +32,18 @@ class ControladorservSocial
   public function Guardar()
   {
 
-    $entidadservSocial = new servSocial();
+    $entidadservSocial = new ServSocial();
 
     $entidadservSocial->id                = $_REQUEST['txtId'];
-    $entidadservSocial->alumnoId          = $_REQUEST['txtaluId'];
-    $entidadservSocial->dependenciaId     = $_REQUEST['txtdepId'];
-    $entidadservSocial->programaId        = $_REQUEST['txtproId'];
-    $entidadservSocial->coordinadorId     = $_REQUEST['txtcoorId'];
+    $entidadservSocial->alumnoid          = $_REQUEST['selAL'];
+    $entidadservSocial->dependenciaid     = $_REQUEST['selDEP'];
+    $entidadservSocial->programaid        = $_REQUEST['selPRO'];
+    $entidadservSocial->coordinadorid     = $_REQUEST['selCOOR'];
     $entidadservSocial->fInicio           = $_REQUEST['txtfIni'];
     $entidadservSocial->fTermina          = $_REQUEST['txtfTer'];
-    $entidadservSocial->estatusId         = $_REQUEST['txtestId'];
+    $entidadservSocial->estatusid         = $_REQUEST['selESTA'];
     $entidadservSocial->fEstatus          = $_REQUEST['txtfEst'];
-
+    echo var_dump($entidadservSocial);
     if ($entidadservSocial->id > 0) {
       $this->modelo->Actualizar($entidadservSocial);
       header('Location: ./controlador.php?gui=servSocial');
